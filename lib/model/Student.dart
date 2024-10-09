@@ -1,17 +1,19 @@
 class Student {
   int? id;
   String? studentName;
+  String? studentPassword;
   String? studentEmail;
   String? studentAddress;
   String? studentPhoneNumber;
 
-  Student({this.id,this.studentName,this.studentEmail,this.studentAddress,this.studentPhoneNumber});
+  Student({this.id,this.studentName,this.studentPassword,this.studentEmail,this.studentAddress,this.studentPhoneNumber});
 
   // convert a Student into a Map
   Map<String,dynamic> toMap() {
     return {
       'id' : id,
       'studName' : studentName,
+      'studPassword' : studentPassword,
       'studEmail' : studentEmail,
       'studAddress' : studentAddress,
       'studPhoneNumber' : studentPhoneNumber
@@ -24,6 +26,7 @@ class Student {
     return Student(
         id: map['id'],
         studentName: map['studName'],
+        studentPassword: map['studPassword'],
         studentEmail: map['studEmail'],
         studentAddress: map['studAddress'],
         studentPhoneNumber: map['studPhoneNumber'],
@@ -32,6 +35,6 @@ class Student {
 
   @override
   String toString() {
-    return 'Student{id : $id, studName : $studentName, studEmail : $studentEmail ,studAddress : $studentAddress ,studPhoneNumber:$studentPhoneNumber}';
+    return 'Student{id : $id, studName : $studentName, studPassword : $studentPassword,studEmail : $studentEmail ,studAddress : $studentAddress ,studPhoneNumber:$studentPhoneNumber}';
   }
 }
