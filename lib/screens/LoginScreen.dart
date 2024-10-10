@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../database/DBHelper.dart';
+import 'DashBoardScreen.dart';
 import 'RegisterScreen.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -13,7 +15,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   TextEditingController studNameController = TextEditingController();
   TextEditingController studPasswordController = TextEditingController();
-
+  final DBHelper dbHelper = DBHelper();
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +45,17 @@ class _LoginScreenState extends State<LoginScreen> {
 
           const SizedBox(height: 15,),
           
-          ElevatedButton(onPressed: (){}, child: Text("LOGIN",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20),)),
+          ElevatedButton(onPressed: () async {
+
+            var result = await dbHelper.validateLoginCrediantails(studNameController.text,studPasswordController.text);
+
+            if (result == true) {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => DashBoardScreen()));
+            } else {
+              print(result);
+            }
+
+          }, child: Text("LOGIN",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20),)),
 
           const SizedBox(height: 15,),
 

@@ -1,5 +1,3 @@
-import 'dart:ffi';
-import 'package:flutter/cupertino.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:student_sqfiter/model/Student.dart';
@@ -8,6 +6,9 @@ class DBHelper {
 
   static final DBHelper instance = DBHelper.myOwnInstance();
   static Database? database;
+
+  factory DBHelper() => instance;
+
   DBHelper.myOwnInstance();
 
   // Get the database Instance
@@ -71,7 +72,7 @@ Future<int?> insertStudentRecord(Student student) async {
     }
 
     // Fetch All Student Records
-    Future<List<Student>?> getStudentsDataList() async {
+    Future<List<Student>> getStudentsDataList() async {
       Database? db = await instance.databaseData;
       var studentsList = await db!.query('Student');
       return List.generate(studentsList.length, (i) {

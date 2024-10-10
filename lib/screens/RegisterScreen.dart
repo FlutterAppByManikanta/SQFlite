@@ -18,6 +18,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
   TextEditingController studAddressController = TextEditingController();
   TextEditingController studPhoneNumberController = TextEditingController();
 
+  final DBHelper dbHelper = DBHelper();
+
 
   @override
   Widget build(BuildContext context) {
@@ -79,9 +81,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
             const SizedBox(height: 15,),
 
-            ElevatedButton(onPressed: () {
+            ElevatedButton(onPressed: () async {
 
-              var id = DBHelper.instance.insertStudentRecord(
+              var id = await dbHelper.insertStudentRecord(
                   Student(
                       studentName: studNameController.text,
                       studentPassword: studPasswordController.text,
@@ -92,7 +94,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
               if (id != -1) {
                 print("Record Inserted SuccessFully $id");
+                Navigator.pop(context);
               }
+
 
             }, child: Text("REGISTER",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20),))
 
